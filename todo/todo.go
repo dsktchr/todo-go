@@ -47,9 +47,8 @@ func FindOne(ctx context.Context, todoId int64) Todo {
 	return todo
 }
 
-func Create(ctx context.Context) int64 {
-	createStmt := `INSERT INTO todos (name) VALUES ('お使い')`
-	result, err := db.DB.ExecContext(ctx, createStmt)
+func Create(ctx context.Context, name string) int64 {
+	result, err := db.DB.ExecContext(ctx, "INSERT INTO todos (name) VALUES (?)", name)
 	if err != nil {
 		log.Fatal(err)
 	}
